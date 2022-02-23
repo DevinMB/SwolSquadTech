@@ -1,8 +1,11 @@
 //TODO: WOOOOOOO!!!!
 
 
+import dao.dao_googleCal;
+import models.Event;
 
-
+import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
@@ -10,8 +13,9 @@ public class Main {
     //TODO: NEED TO CALL DAO 'N STUFF
 
     //MAIN
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         System.out.println("heyoooo");
+        List<Event> listOfEvents = dao_googleCal.getEvents();
 
         //run stuff
     }
