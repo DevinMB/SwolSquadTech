@@ -9,10 +9,7 @@ import okhttp3.Request;
 import okhttp3.ResponseBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 
 public class dao_googleCal {
@@ -38,9 +35,15 @@ public class dao_googleCal {
         assert responseBody != null;
         Calendar newCalendar = newObjectMapper.readValue(responseBody.string(), Calendar.class);
         Event[] events = newCalendar.getEvents();
-
-//        import java.util.*;
-//
+        //convert to array list
+        List<Event> eventList = Arrays.asList(events);
+        //Sort List Of Events
+        eventList.sort(new Comparator<Event>() {
+            public int compare(Event e1, Event e2) {
+                // notice the cast to (Integer) to invoke compareTo
+                return (e1.getStart().getDate()).compareTo(e2.getStart().getDate());
+            }
+        });
 //        public class SimpleTesting {
 //            public static void main (String[] args) {
 //                List<String> dateArray = new ArrayList<String>();
@@ -57,7 +60,7 @@ public class dao_googleCal {
 //        }
 
 
-        for (Event event : events){
+        for (Event event : eventList){
             System.out.println(event.getEventName() + " " + event.getStart().getDate());
 
         }
