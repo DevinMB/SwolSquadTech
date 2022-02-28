@@ -1,27 +1,26 @@
 package dao;
 ////TODO:https://howtodoinjava.com/gson/gson-parse-json-array/
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import models.Calendar;
 import models.Event;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import javax.sql.DataSource;
+
 
 public class dao_googleCal {
 
 
-    public static List<Event> getEvents() throws IOException {
+    public static List<Calendar> getEvents() throws IOException {
         //Create Empty List Of Events
-        List<Event> listOfEvents = new ArrayList<>();
+        List<Calendar> listOfCalendars = new ArrayList<>();
 
 
 
@@ -31,23 +30,37 @@ public class dao_googleCal {
         Request request = new Request.Builder()
                 .url("https://www.googleapis.com/calendar/v3/calendars/devinmbutts@gmail.com/events")
                 .method("GET", null)
-                .addHeader("Authorization", "Bearer ya29.A0ARrdaM8YENnx2VdrBoMa1VI6hgYwzwtXbl7DP6rFU6mCxkrGyJ_VUMHdJ88C-jcwoKR86mU8_QQixfkPSmoJRL521J8cdHgtSNIR7Ye6ypZcFmzSRhuF70Cy8cblOo2xUmXhnNbr8riWFsZLRwuhtkwkDfNO")
+                .addHeader("Authorization", "Bearer ya29.A0ARrdaM_YUccf0ablMUH9eSujsrPwcs7oBdfG0eVfxdbommw9yUUUhEOnHGUn5xOSIH_UbYUsM4DpmrlqI9aTsOztcClPB0Vy2jvpo0SgFhP0Kg0wMWRh_eDqERBDIN45DD0efEXk1NOP2gj_i-aZEUw9jaDt")
                 .build();
-        Response response = client.newCall(request).execute();
-        //I think this is a JSON object below??
+        ResponseBody responseBody = client.newCall(request).execute().body();
+        ObjectMapper newObjectMapper = new ObjectMapper();
+        newObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); //Will Ignore Undefined Objects
+        assert responseBody != null;
+        Calendar newCalendar = newObjectMapper.readValue(responseBody.string(), Calendar.class);
+        Event[] events = newCalendar.getEvents();
 
-        System.out.println(response);
+//        import java.util.*;
+//
+//        public class SimpleTesting {
+//            public static void main (String[] args) {
+//                List<String> dateArray = new ArrayList<String>();
+//                dateArray.add("2020-03-25");
+//                dateArray.add("2019-01-27");
+//                dateArray.add("2020-03-26");
+//                dateArray.add("2020-02-26");
+//                System.out.println("The Object before sorting is : "
+//                        + dateArray);
+//                Collections.sort(dateArray);
+//                System.out.println("The Object after sorting is : "
+//                        + dateArray);
+//            }
+//        }
 
 
-        Gson gson = new Gson();
-        if(response.isSuccessful()) {
-            ResponseBody responseBody = client.newCall(request).execute().body();
-            Event entity = gson.fromJson(responseBody.string(), Event.class);
-            System.out.println(entity.getSummary());
+        for (Event event : events){
+            System.out.println(event.getEventName() + " " + event.getStart().getDate());
+
         }
-        //TODO: https://stackoverflow.com/questions/23070298/get-nested-json-object-with-gson-using-retrofit
-        //TODO: Convert JSON to List of Events (Define Event in Models Folder)
-
         return null;
     }
 

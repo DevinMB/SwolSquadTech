@@ -2,7 +2,7 @@
 
 
 import dao.dao_googleCal;
-import models.Event;
+import models.Calendar;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Main {
     //MAIN
     public static void main(String[] args) throws IOException {
         System.out.println("heyoooo");
-        List<Event> listOfEvents = dao_googleCal.getEvents();
+        List<Calendar> listOfCalendars = dao_googleCal.getEvents();
 
         //run stuff
     }

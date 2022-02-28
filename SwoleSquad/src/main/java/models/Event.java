@@ -1,26 +1,22 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Event {
     //Instance Variables
-    private String summary;
-
+    @JsonProperty("summary")
+    private String eventName;
+    private Start start;
 
     //Constructors
 
-    //Getters
+    //Getters //Setters
 
-    public String getSummary() {
-        return summary;
+    public String getEventName() {
+        return eventName;
     }
 
-    //Setters
-
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public Start getStart() {
+        return start;
     }
-
-    //Methods
-
-
-
 }
