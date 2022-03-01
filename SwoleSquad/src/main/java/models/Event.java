@@ -9,6 +9,7 @@ public class Event {
     private Start start;
 
     //Constructors
+    //Default
 
     //Getters //Setters
 

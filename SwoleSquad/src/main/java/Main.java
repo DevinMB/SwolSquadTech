@@ -3,6 +3,7 @@
 
 import dao.dao_googleCal;
 import models.Calendar;
+import models.Event;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,14 +11,21 @@ import java.util.List;
 public class Main {
 
 
-    //TODO: NEED TO CALL DAO 'N STUFF
+
 
     //MAIN
     public static void main(String[] args) throws IOException {
-        System.out.println("heyoooo");
-        List<Calendar> listOfCalendars = dao_googleCal.getEvents();
+        System.out.println("Lets Gooooooooo");
 
-        //run stuff
+        //Populate Events
+        List<Event> eventList = new dao_googleCal().getEvents();
+
+        //Print out list of events!!
+        for (Event event : eventList){
+            System.out.println(event.getEventName() + " " + event.getStart().getDate());
+
+        }
+
     }
 
 }

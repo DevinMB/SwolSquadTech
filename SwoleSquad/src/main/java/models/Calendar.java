@@ -10,6 +10,7 @@ public class Calendar {
     private Event[] events;
 
     //Constructors
+    //Default
 
     //Getters & Setters
 
