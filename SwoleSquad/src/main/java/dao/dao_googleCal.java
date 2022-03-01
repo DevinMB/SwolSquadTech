@@ -22,10 +22,11 @@ public class dao_googleCal {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
-                .url("https://www.googleapis.com/calendar/v3/calendars/devinmbutts@gmail.com/events")
+                .url("https://www.googleapis.com/calendar/v3/calendars/devinmbutts%40gmail.com/events?orderBy=startTime&singleEvents=true&maxResults=2500&timeMin=2020-01-01T10%3A00%3A00-07%3A00")
                 .method("GET", null)
-                .addHeader("Authorization", "Bearer ya29.A0ARrdaM_KvcxcVRC3KwZi0FNeyxi9R7ok9vTp6HBlWUwGB-ePqiIzYizMCVEqo0uyKctK2_lJB1jxQROJ_Dxd3reZ9pg8iylti7nLtUcbRu782bipdLjk3xrtD8LnZBSZ9F6Q90iYo8Bd4CNqyUgcybUdSbkw")
+                .addHeader("Authorization", "Bearer ya29.A0ARrdaM_633ggtvmhXTZfbrLnhEr2RzL0o8rrCTFQ_g76cdgfupZ-HzQXnKPgxS6ASr16ZBzQGg6dAyVl6SVdV3UdTW9wdkGsaP5FvRQBQU9icrCRDhoWBrnbwE6Rx1RMp3Nt1TzFKSVxZEEfk14lYPQ8Z_ey")
                 .build();
+        //Response response = client.newCall(request).execute();
         ResponseBody responseBody = client.newCall(request).execute().body();
 
         //Map Object to Calendar Class
@@ -38,13 +39,7 @@ public class dao_googleCal {
         Event[] events = newCalendar.getEvents();
         //convert to array list
         List<Event> eventList = Arrays.asList(events);
-        //Sort List Of Events
-        eventList.sort(new Comparator<Event>() {
-            public int compare(Event e1, Event e2) {
-                // notice the cast to (Integer) to invoke compareTo
-                return (e1.getStart().getDate()).compareTo(e2.getStart().getDate());
-            }
-        });
+
 
 
         return eventList;

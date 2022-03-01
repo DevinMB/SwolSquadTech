@@ -22,7 +22,7 @@ public class Main {
 
         //Print out list of events!!
         for (Event event : eventList){
-            System.out.println(event.getEventName() + " " + event.getStart().getDate());
+            System.out.println(event.getEventName() + " " + event.getStart().getDisplayDate());
 
         }
 

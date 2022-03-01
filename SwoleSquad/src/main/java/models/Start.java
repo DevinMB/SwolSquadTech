@@ -18,24 +18,24 @@ public class Start {
     //Default
 
     //Getters
-    public Date getDate()  {
-        Date dateHandled = null;
-        if (isNull(dateTime) & isNull(date)) {
-            try {
-                dateHandled = new SimpleDateFormat("dd/MM/yyyy").parse("30/12/1999");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        } else if (isNull(dateTime) & nonNull(date)) {
-            dateHandled = date;
-        } else if (nonNull(dateTime) & isNull(date)) {
-            dateHandled = dateTime;
-        }
 
 
-        return dateHandled;
+    public Date getDate() {
+        return date;
     }
 
+    public Date getDateTime() {
+        return dateTime;
+    }
 
+    public Date getDisplayDate(){
+        Date displayDate = null;
 
+        if(isNull(this.date)){
+            displayDate = this.dateTime;
+        } else {
+            displayDate = this.date;
+        }
+        return displayDate;
+    }
 }
