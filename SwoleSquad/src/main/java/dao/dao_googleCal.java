@@ -24,7 +24,7 @@ public class dao_googleCal {
         Request request = new Request.Builder()
                 .url("https://www.googleapis.com/calendar/v3/calendars/devinmbutts%40gmail.com/events?orderBy=startTime&singleEvents=true&maxResults=2500&timeMin=2020-01-01T10%3A00%3A00-07%3A00")
                 .method("GET", null)
-                .addHeader("Authorization", "Bearer ya29.A0ARrdaM_633ggtvmhXTZfbrLnhEr2RzL0o8rrCTFQ_g76cdgfupZ-HzQXnKPgxS6ASr16ZBzQGg6dAyVl6SVdV3UdTW9wdkGsaP5FvRQBQU9icrCRDhoWBrnbwE6Rx1RMp3Nt1TzFKSVxZEEfk14lYPQ8Z_ey")
+                .addHeader("Authorization", "Bearer TOKEN")
                 .build();
         //Response response = client.newCall(request).execute();
         ResponseBody responseBody = client.newCall(request).execute().body();
